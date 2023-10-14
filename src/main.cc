@@ -34,7 +34,7 @@ namespace champsim
 {
 std::vector<phase_stats> main(environment& env, std::vector<phase_info>& phases, std::vector<tracereader>& traces);
 }
-
+int branch_type_counter[8];
 int main(int argc, char** argv)
 {
   champsim::configured::generated_environment gen_environment{};
@@ -116,6 +116,15 @@ int main(int argc, char** argv)
       champsim::json_printer{json_file}.print(phase_stats);
     }
   }
+
+  fmt::print("\nNOT_BRANCH: {}\n",branch_type_counter[0]);
+  fmt::print("\nBRANCH_DIRECT_JUMP: {}\n",branch_type_counter[1]);
+  fmt::print("\nBRANCH_INDIRECT: {}\n",branch_type_counter[2]);
+  fmt::print("\nBRANCH_CONDITIONAL: {}\n",branch_type_counter[3]);
+  fmt::print("\nBRANCH_DIRECT_CALL: {}\n",branch_type_counter[4]);
+  fmt::print("\nBRANCH_INDIRECT_CALL: {}\n",branch_type_counter[5]);
+  fmt::print("\nBRANCH_RETURN: {}\n",branch_type_counter[6]);
+  fmt::print("\nBRANCH_OTHER: {}\n",branch_type_counter[7]);
 
   return 0;
 }
