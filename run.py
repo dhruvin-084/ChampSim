@@ -100,7 +100,7 @@ def Perceptron(phistory = 24, pbits = 8, pnum = 163):
 
 def tage(lenGlobal = 14, lenTag = 11,minHistory=5, maxHistory = 131):
     predictor_name = "tage"
-    prefix = "_his_"+str(minHistory)+"_"+str(maxHistory)
+    prefix = "_"+str(lenGlobal)+"_"+str(minHistory)+"_"+str(maxHistory)
     bin_name = "bin/champsim_"+predictor_name+prefix
 
     change_config(predictor_name, prefix)
@@ -145,6 +145,7 @@ def Hybrid(phistory = 24, pbits = 8, pnum = 163, tglobalLen = 13, ttagLen = 11, 
 # gshare(17, 2, 2**17)
 # gshare(16, 2, 2**16)
 # gshare(15, 2, 2**15)
+
 # run("bin/champsim_gshare_15_2_"+str(2**15), "_gshare_8KB", 1000000000, 500000000)
 # run("bin/champsim_gshare_16_2_"+str(2**16), "_gshare_16KB", 1000000000, 500000000)
 # run("bin/champsim_gshare_17_2_"+str(2**17), "_gshare_32KB", 1000000000, 500000000)
@@ -201,6 +202,7 @@ def perceptron_size(phistory, pbits, pnum):
 #Perceptron(48, 8, 335)
 #Perceptron(38, 6, 268)
 
+
 # run("bin/champsim_perceptron_48_8_335", "_perceptron_16KB", 1000000000, 500000000)
 # run("bin/champsim_perceptron_48_8_335", "_perceptron_64KB", 1000000000, 500000000)
 # run("bin/champsim_perceptron_96_16_678", "_perceptron_128KB", 1000000000, 500000000)
@@ -214,3 +216,4 @@ def perceptron_size(phistory, pbits, pnum):
 # run("bin/champsim_tage_his_5_73", "_tage_his_5_73", 1000000000, 500000000)
 # run("bin/champsim_tage_his_15_180", "_tage_his_15_180", 1000000000, 500000000)
 # run("bin/champsim_tage_his_25_240", "_tage_his_25_240", 1000000000, 500000000)
+

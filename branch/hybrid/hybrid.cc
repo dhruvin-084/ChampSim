@@ -2,9 +2,10 @@
 #include "../tage/tage.h"
 #include "../perceptron/perceptron.h"
 
-#define HYBRID_TABLE_SIZE 8192
 
-#define BIMODAL_PRIME 8191;
+#define HYBRID_TABLE_SIZE 4096
+
+#define BIMODAL_PRIME 4093;
 
 uint8_t bimodal_table[HYBRID_TABLE_SIZE];
 

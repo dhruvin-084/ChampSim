@@ -1,5 +1,6 @@
 {
     "executable_name": "champsim_tage_his_25_240",
+
     "block_size": 64,
     "page_size": 4096,
     "heartbeat_frequency": 10000000,

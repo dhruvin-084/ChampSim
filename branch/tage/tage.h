@@ -101,6 +101,7 @@
 #ifndef MIN_HISTORY_LEN
 #define MIN_HISTORY_LEN 5
 #endif
+
 #ifndef MAX_HISTORY_LEN
 #define MAX_HISTORY_LEN 131
 #endif
