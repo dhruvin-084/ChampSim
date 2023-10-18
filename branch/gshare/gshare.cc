@@ -6,17 +6,17 @@
 #include "msl/fwcounter.h"
 #include "ooo_cpu.h"
 
-// #ifndef GSHARE_TABLE_SIZE
-// #define GSHARE_TABLE_SIZE 16384
-// #endif
+#ifndef GSHARE_TABLE_SIZE
+#define GSHARE_TABLE_SIZE 16384
+#endif
 
-// #ifndef GSHARE_HISTORY_LENGTH
-// #define GSHARE_HISTORY_LENGTH 14
-// #endif
+#ifndef GSHARE_HISTORY_LENGTH
+#define GSHARE_HISTORY_LENGTH 14
+#endif
 
-// #ifndef GSHARE_COUNTER_BITS
-// #define GSHARE_COUNTER_BITS 2
-// #endif
+#ifndef GSHARE_COUNTER_BITS
+#define GSHARE_COUNTER_BITS 2
+#endif
 namespace
 {
 constexpr std::size_t GLOBAL_HISTORY_LENGTH = GSHARE_HISTORY_LENGTH;

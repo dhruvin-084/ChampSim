@@ -1,85 +1,69 @@
-# ChampSim
+# CA Assignment 1 P1
 
-![GitHub](https://img.shields.io/github/license/ChampSim/ChampSim)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ChampSim/ChampSim/test.yml)
-![GitHub forks](https://img.shields.io/github/forks/ChampSim/ChampSim)
-[![Coverage Status](https://coveralls.io/repos/github/ChampSim/ChampSim/badge.svg?branch=develop)](https://coveralls.io/github/ChampSim/ChampSim?branch=develop)
+This is part of Assignment 1 P1 of coures E0 243 Computer architecture offered at CSA department at Indian Institute of Science.
 
-ChampSim is a trace-based simulator for a microarchitecture study. If you have questions about how to use ChampSim, we encourage you to search the threads in the Discussions tab or start your own thread. If you are aware of a bug or have a feature request, open a new Issue.
+In this assignment we eavluate different branch predictors with ChampSim simulator
 
-# Using ChampSim
+ChampSim installation guilde can be found in [ChampSim_README.md](ChampSim_README.md) file
 
-ChampSim is the result of academic research. To support its continued growth, please cite our work when you publish results that use ChampSim by clicking "Cite this Repository" in the sidebar.
 
-# Download dependencies
+## Building and running champsim for different predictors
 
-ChampSim uses [vcpkg](https://vcpkg.io) to manage its dependencies. In this repository, vcpkg is included as a submodule. You can download the dependencies with
-```
-git submodule update --init
-vcpkg/bootstrap-vcpkg.sh
-vcpkg/vcpkg install
-```
+We have written python script for building and running the simulation for different predictors and different 
 
-# Compile
+[run.py](run.py) script contains functions to compile and run siumation for different configuration of branch pridcitors.
 
-ChampSim takes a JSON configuration script. Examine `champsim_config.json` for a fully-specified example. All options described in this file are optional and will be replaced with defaults if not specified. The configuration scrip can also be run without input, in which case an empty file is assumed.
-```
-$ ./config.sh <configuration file>
-$ make
-```
+run.py contains functions:
 
-# Download DPC-3 trace
+### ```gshare(history_length, counter_bits, table_size)```
+This function will compile ChampSim with gshare predictor. It will store the executable file in bin folder
+#### Parameters:
+- history_length: length of the BHR register
+- counter_bits: number of bits for saturating counter per table entry
+- table_size: number of entry in pattern history table
 
-Traces used for the 3rd Data Prefetching Championship (DPC-3) can be found here. (https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/) A set of traces used for the 2nd Cache Replacement Championship (CRC-2) can be found from this link. (http://bit.ly/2t2nkUj)
+### ```Perceptron(phistory, pbits, pnum)```
+This functions will compile ChampSim with Perceptron preditor. It will store the executable file in bin folder.
 
-Storage for these traces is kindly provided by Daniel Jimenez (Texas A&M University) and Mike Ferdman (Stony Brook University). If you find yourself frequently using ChampSim, it is highly encouraged that you maintain your own repository of traces, in case the links ever break.
+#### Parameters:
+- phisotry: perceptron history length
+- pbits: number of bits per weight
+- pnum: number of perceptron
 
-# Run simulation
+### ```tage(lenGlobal, lenTag, minHistory, maxHistory)```
+This functions will compile ChampSim with tage preditor. It will store the executable file in bin folder.
 
-Execute the binary directly.
-```
-$ bin/champsim --warmup_instructions 200000000 --simulation_instructions 500000000 ~/path/to/traces/600.perlbench_s-210B.champsimtrace.xz
-```
+#### parameters:
+- lenGlobal: bits of the global history
+- lenTag: bits per tag
+- minHisotry: minimum bits in geometric history
+- maxHistory: maximum bits in geometric history
 
-The number of warmup and simulation instructions given will be the number of instructions retired. Note that the statistics printed at the end of the simulation include only the simulation phase.
 
-# Add your own branch predictor, data prefetchers, and replacement policy
-**Copy an empty template**
-```
-$ mkdir prefetcher/mypref
-$ cp prefetcher/no_l2c/no.cc prefetcher/mypref/mypref.cc
-```
 
-**Work on your algorithms with your favorite text editor**
-```
-$ vim prefetcher/mypref/mypref.cc
-```
+### ```Hybrid(phistory, pbits, pnum, tglobalLen, ttagLen, postfix)```
+This functions will compile ChampSim with hybrid preditor. It will store the executable file in bin folder.
 
-**Compile and test**
-Add your prefetcher to the configuration file.
-```
-{
-    "L2C": {
-        "prefetcher": "mypref"
-    }
-}
-```
-Note that the example prefetcher is an L2 prefetcher. You might design a prefetcher for a different level.
+#### Parameters:
+- phisotry: perceptron history length
+- pbits: number of bits per weight in perceptron
+- pnum: number of perceptron
+- tlenGlobal: bits of the global history for tage
+- tlenTag: bits per tag for tage
+- tminHisotry: minimum bits in geometric history for tage
+- tmaxHistory: maximum bits in geometric history for tage
+- postfix: postfix for name of executable file. e.g. "5050", "3070" or "7030"
 
-```
-$ ./config.sh <configuration file>
-$ make
-$ bin/champsim --warmup_instructions 200000000 --simulation_instructions 500000000 600.perlbench_s-210B.champsimtrace.xz
-```
+### ```run(bin_name, logstr, warmup, simulation)```
+This function will run the simulation. It will also store the log file in log folder.
 
-# How to create traces
+#### Parameters:
+- bin_name: name binary executable file
+- logstr: postfix string for the log file
+- warmup: number of warmup instructions
+- simulation: number of simulation instructions
 
-Program traces are available in a variety of locations, however, many ChampSim users wish to trace their own programs for research purposes.
-Example tracing utilities are provided in the `tracer/` directory.
 
-# Evaluate Simulation
+We have commented functions in run.py file. Just uncomment the functions for any configuration of the branch predictor and run the python script. It will generate the binary exectuable in bin folder.
 
-ChampSim measures the IPC (Instruction Per Cycle) value as a performance metric. <br>
-There are some other useful metrics printed out at the end of simulation. <br>
-
-Good luck and be a champion! <br>
+You can run this executable manually or using run fucntion provided in the script. 
